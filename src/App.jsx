@@ -73,9 +73,9 @@ const [episode, setEpisode] = useState('');
           setIsLoading(false);
           return;
         }
-        url = `http://localhost:5000/api/episode?t=${encodeURIComponent(searchQuery)}&season=${season}&episode=${episode}`;
+        url = `/api/episode?t=${encodeURIComponent(searchQuery)}&season=${season}&episode=${episode}`;
       } else {
-        url = `http://localhost:5000/api/search?q=${searchQuery}&type=${searchType}`;
+        url = `/api/search?q=${encodeURIComponent(searchQuery)}&type=${searchType}`;
       }
   
       const response = await fetch(url);
@@ -94,6 +94,7 @@ const [episode, setEpisode] = useState('');
       setIsLoading(false);
     }
   };
+  
   
 
   const toggleBookmark = (item) => {
@@ -351,7 +352,7 @@ function MovieCard({ item, isBookmarked, onToggleBookmark }) {
     const fetchDetails = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`http://localhost:5000/api/details?id=${item.imdbID}`);
+        const response = await fetch(`/api/details?id=${item.imdbID}`);
         const data = await response.json();
         if (data.Response === 'True') setDetails(data);
       } catch (error) {
@@ -360,6 +361,7 @@ function MovieCard({ item, isBookmarked, onToggleBookmark }) {
         setLoading(false);
       }
     };
+    
     fetchDetails();
   }, [item.imdbID]);
 
