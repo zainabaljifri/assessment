@@ -120,12 +120,19 @@ export default async function handler(req, res) {
   if (url.startsWith('/api/episode')) {
     const { t, season, episode } = query;
 
-    if (!t || !season || !episode) {
-      return res.status(400).json({ error: 'Missing title, season or episode' });
+    if (!t || !season) {
+      return res.status(400).json({ error: 'Missing title or season' });
     }
 
     try {
-      const apiUrl = `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&t=${encodeURIComponent(t)}&Season=${season}&Episode=${episode}`;
+      let apiUrl;
+      if (!episode) {
+        // Return all episodes for the season
+        apiUrl = `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&t=${encodeURIComponent(t)}&Season=${season}`;
+      } else {
+        // Return a specific episode
+        apiUrl = `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&t=${encodeURIComponent(t)}&Season=${season}&Episode=${episode}`;
+      }
       const response = await fetch(apiUrl);
       const data = await response.json();
       return res.status(200).json(data);
