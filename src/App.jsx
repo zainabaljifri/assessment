@@ -258,11 +258,10 @@ const [episode, setEpisode] = useState('');
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 justify-items-center">
                   {searchResults.map((item) => (
                     <MovieCard
-                      key={item.imdbID || item.episodeID || item.Title}
+                      key={item.imdbID}
                       item={item}
                       isBookmarked={isBookmarked(item.imdbID)}
                       onToggleBookmark={() => toggleBookmark(item)}
-                      hideImage={searchType === 'episode' && !episode}
                     />
                   ))}
                 </div>
@@ -355,14 +354,9 @@ const [episode, setEpisode] = useState('');
   );
 }
 
-function MovieCard({ item, isBookmarked, onToggleBookmark, hideImage }) {
+function MovieCard({ item, isBookmarked, onToggleBookmark }) {
   const [details, setDetails] = useState(null);
   const [loading, setLoading] = useState(false);
-
-  // Determine if this is a whole season episode card (no imdbID, but has Episode and Title)
-  const isSeasonEpisode = !item.imdbID && item.Episode && item.Title;
-  const fallbackSeasonPoster =
-    'https://m.media-amazon.com/images/M/MV5BY2ExMTg4ZmEtZWE5YS00ZGMyLWE4NzgtY2IyODczZjJjODEwXkEyXkFqcGdeQXVyNTY3NjQzNjM@._V1_SX300.jpg';
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -383,36 +377,26 @@ function MovieCard({ item, isBookmarked, onToggleBookmark, hideImage }) {
 
   return (
     <div className="card group max-w-[240px] mx-auto bg-white/95 dark:bg-gray-800/95 rounded-xl border border-gray-100 dark:border-gray-700 hover:scale-105 transition-all duration-200 cursor-pointer p-3 sm:p-0">
-      {!hideImage && (
-        <div className="relative overflow-hidden rounded-xl">
-          <img
-            src={
-              isSeasonEpisode
-                ? (item.Poster && item.Poster !== 'N/A' ? item.Poster : fallbackSeasonPoster)
-                : (item.Poster !== 'N/A' ? item.Poster : '/placeholder-poster.jpg')
-            }
-            alt={item.Title}
-            className="w-full aspect-[2/3] object-cover rounded-xl mb-3 border border-gray-200 dark:border-gray-700 group-hover:brightness-90 group-hover:scale-105 transition-all duration-200"
-            onError={(e) => {
-              if (isSeasonEpisode) {
-                e.target.src = fallbackSeasonPoster;
-              } else {
-                e.target.src =
-                  'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIFBvc3RlcjwvdGV4dD48L3N2Zz4=';
-              }
-            }}
-          />
-          {/* <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none rounded-xl" /> */}
-          <button
-            onClick={onToggleBookmark}
-            className="absolute top-2 right-2 p-2 bg-white dark:bg-gray-800 rounded-full transition-all"
-            aria-label={isBookmarked ? 'Remove bookmark' : 'Add bookmark'}
-            title={isBookmarked ? 'Remove from bookmarks' : 'Add to bookmarks'}
-          >
-            {isBookmarked ? <FaBookmark className="text-yellow-500" /> : <FiBookmark className="text-gray-800 dark:text-white" />}
-          </button>
-        </div>
-      )}
+      <div className="relative overflow-hidden rounded-xl">
+        <img
+          src={item.Poster !== 'N/A' ? item.Poster : '/placeholder-poster.jpg'}
+          alt={item.Title}
+          className="w-full aspect-[2/3] object-cover rounded-xl mb-3 border border-gray-200 dark:border-gray-700 group-hover:brightness-90 group-hover:scale-105 transition-all duration-200"
+          onError={(e) => {
+            e.target.src =
+              'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIFBvc3RlcjwvdGV4dD48L3N2Zz4=';
+          }}
+        />
+        {/* <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none rounded-xl" /> */}
+        <button
+          onClick={onToggleBookmark}
+          className="absolute top-2 right-2 p-2 bg-white dark:bg-gray-800 rounded-full transition-all"
+          aria-label={isBookmarked ? 'Remove bookmark' : 'Add bookmark'}
+          title={isBookmarked ? 'Remove from bookmarks' : 'Add to bookmarks'}
+        >
+          {isBookmarked ? <FaBookmark className="text-yellow-500" /> : <FiBookmark className="text-gray-800 dark:text-white" />}
+        </button>
+      </div>
 
       <div className="space-y-2 pb-2 px-2 pt-1">
         <h3 className="text-lg font-bold text-gray-900 dark:text-white break-words leading-tight font-montserrat">{item.Title}</h3>
