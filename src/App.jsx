@@ -198,7 +198,11 @@ const [episode, setEpisode] = useState('');
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search for movies, series, or episodes..."
+                    placeholder={
+                      searchType === 'episode'
+                        ? 'Search for series name...'
+                        : 'Search for movies, series, or episodes...'
+                    }
                     className="input flex-1 text-lg"
                   />
                 
