@@ -68,12 +68,18 @@ const [episode, setEpisode] = useState('');
       let url = '';
   
       if (searchType === 'episode') {
-        if (!season || !episode) {
-          setError('Please enter both season and episode numbers.');
+        if (!season) {
+          setError('Please enter a season number.');
           setIsLoading(false);
           return;
         }
-        url = `/api/episode?t=${encodeURIComponent(searchQuery)}&season=${season}&episode=${episode}`;
+        if (!episode) {
+          // Fetch all episodes for the season
+          url = `/api/episode?t=${encodeURIComponent(searchQuery)}&season=${season}`;
+        } else {
+          // Fetch a specific episode
+          url = `/api/episode?t=${encodeURIComponent(searchQuery)}&season=${season}&episode=${episode}`;
+        }
       } else {
         url = `/api/search?q=${encodeURIComponent(searchQuery)}&type=${searchType}`;
       }
@@ -82,7 +88,7 @@ const [episode, setEpisode] = useState('');
       const data = await response.json();
   
       if (data.Response === 'True') {
-        setSearchResults(searchType === 'episode' ? [data] : data.Search || []);
+        setSearchResults(searchType === 'episode' && !episode ? data.Episodes || [] : searchType === 'episode' ? [data] : data.Search || []);
       } else {
         setError(data.Error || 'No results found');
         setSearchResults([]);
