@@ -384,11 +384,13 @@ function MovieCard({ item, isBookmarked, onToggleBookmark, isWholeSeason }) {
       <div className="relative overflow-hidden rounded-xl">
         <img
           src={
-            item.Poster !== 'N/A'
-              ? item.Poster
-              : isWholeSeason
-                ? 'https://m.media-amazon.com/images/M/MV5BY2ExMTg4ZmEtZWE5YS00ZGMyLWE4NzgtY2IyODczZjJjODEwXkEyXkFqcGdeQXVyNTY3NjQzNjM@._V1_SX300.jpg'
-                : '/placeholder-poster.jpg'
+            details.Poster !== 'N/A' && details.Poster !== null && details.Poster !== undefined
+              ? details.Poster
+              :
+              //  isWholeSeason
+              //   ? 'https://m.media-amazon.com/images/M/MV5BY2ExMTg4ZmEtZWE5YS00ZGMyLWE4NzgtY2IyODczZjJjODEwXkEyXkFqcGdeQXVyNTY3NjQzNjM@._V1_SX300.jpg'
+              //   : 
+                '/placeholder-poster.jpg'
           }
           alt={item.Title}
           className="w-full aspect-[2/3] object-cover rounded-xl mb-3 border border-gray-200 dark:border-gray-700 group-hover:brightness-90 group-hover:scale-105 transition-all duration-200"
@@ -413,7 +415,7 @@ function MovieCard({ item, isBookmarked, onToggleBookmark, isWholeSeason }) {
         
         <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
   <FiCalendar className="w-4 h-4" />
-  <span>{item.Year}</span>
+  <span>{details.Year}</span>
 </div>
 
         {details && (
