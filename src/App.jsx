@@ -127,6 +127,9 @@ const [episode, setEpisode] = useState('');
     ${active ? 'bg-primary-600 text-white shadow-md' : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-800 hover:text-primary-700'}
     `;
 
+  // Add a helper to determine if we're showing a whole season
+  const isWholeSeason = searchType === 'episode' && !episode;
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
       <div className="container mx-auto px-2 sm:px-4 py-8">
@@ -262,6 +265,7 @@ const [episode, setEpisode] = useState('');
                       item={item}
                       isBookmarked={isBookmarked(item.imdbID)}
                       onToggleBookmark={() => toggleBookmark(item)}
+                      isWholeSeason={isWholeSeason}
                     />
                   ))}
                 </div>
@@ -354,7 +358,7 @@ const [episode, setEpisode] = useState('');
   );
 }
 
-function MovieCard({ item, isBookmarked, onToggleBookmark }) {
+function MovieCard({ item, isBookmarked, onToggleBookmark, isWholeSeason }) {
   const [details, setDetails] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -379,7 +383,13 @@ function MovieCard({ item, isBookmarked, onToggleBookmark }) {
     <div className="card group max-w-[240px] mx-auto bg-white/95 dark:bg-gray-800/95 rounded-xl border border-gray-100 dark:border-gray-700 hover:scale-105 transition-all duration-200 cursor-pointer p-3 sm:p-0">
       <div className="relative overflow-hidden rounded-xl">
         <img
-          src={item.Poster !== 'N/A' ? item.Poster : '/placeholder-poster.jpg'}
+          src={
+            item.Poster !== 'N/A'
+              ? item.Poster
+              : isWholeSeason
+                ? 'https://m.media-amazon.com/images/M/MV5BY2ExMTg4ZmEtZWE5YS00ZGMyLWE4NzgtY2IyODczZjJjODEwXkEyXkFqcGdeQXVyNTY3NjQzNjM@._V1_SX300.jpg'
+                : '/placeholder-poster.jpg'
+          }
           alt={item.Title}
           className="w-full aspect-[2/3] object-cover rounded-xl mb-3 border border-gray-200 dark:border-gray-700 group-hover:brightness-90 group-hover:scale-105 transition-all duration-200"
           onError={(e) => {
