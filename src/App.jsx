@@ -245,7 +245,7 @@ const [episode, setEpisode] = useState('');
                 <h2 className="text-2xl font-bold mb-8 text-gray-900 dark:text-white tracking-tight">
                   Search Results
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 justify-items-center">
                   {searchResults.map((item) => (
                     <MovieCard
                       key={item.imdbID}
@@ -272,7 +272,7 @@ const [episode, setEpisode] = useState('');
                   <FaFilm className="text-primary-600" />
                   Movies
                 </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 justify-items-center">
                   {bookmarks.filter(item => item.Type === 'movie').map((item) => (
                     <MovieCard
                       key={item.imdbID}
@@ -292,7 +292,7 @@ const [episode, setEpisode] = useState('');
                   <FiBookmark className="text-primary-600" />
                   Series
                 </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 justify-items-center">
                   {bookmarks.filter(item => item.Type === 'series').map((item) => (
                     <MovieCard
                       key={item.imdbID}
@@ -312,7 +312,7 @@ const [episode, setEpisode] = useState('');
                   <FiCalendar className="text-primary-600" />
                   Episodes
                 </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 justify-items-center">
                   {bookmarks.filter(item => item.Type === 'episode').map((item) => (
                     <MovieCard
                       key={item.imdbID}
