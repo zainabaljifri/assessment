@@ -88,8 +88,21 @@ const [episode, setEpisode] = useState('');
       const data = await response.json();
   
       if (data.Response === 'True') {
-        setSearchResults(searchType === 'episode' && !episode ? data.Episodes || [] : searchType === 'episode' ? [data] : data.Search || []);
-      } else {
+        let results = [];
+      
+        if (searchType === 'episode' && !episode) {
+          // Full season: tag each episode with Type
+          results = (data.Episodes || []).map(ep => ({ ...ep, Type: 'episode' }));
+        } else if (searchType === 'episode') {
+          // Single episode
+          results = [{ ...data, Type: 'episode' }];
+        } else {
+          results = data.Search || [];
+        }
+      
+        setSearchResults(results);
+      }
+       else {
         setError(data.Error || 'No results found');
         setSearchResults([]);
       }
