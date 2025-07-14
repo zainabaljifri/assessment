@@ -394,15 +394,15 @@ function MovieCard({ item, isBookmarked, onToggleBookmark, isWholeSeason }) {
 
   return (
     <div className="card group max-w-[240px] mx-auto bg-white/95 dark:bg-gray-800/95 rounded-xl border border-gray-100 dark:border-gray-700 hover:scale-105 transition-all duration-200 cursor-pointer p-3 sm:p-0">
-      <div className="relative overflow-hidden rounded-xl">
-      <img
+      <div className="relative overflow-hidden rounded-none sm:rounded-xl -mx-3 sm:mx-0">
+        <img
     src={
       (details?.Poster && details.Poster !== 'N/A')
         ? details.Poster
         : '/placeholder-poster.jpg'
     }
     alt={item.Title}
-    className={`w-full aspect-[2/3] object-cover rounded-xl mb-3 border border-gray-200 dark:border-gray-700 group-hover:brightness-90 group-hover:scale-105 transition-all duration-200
+    className={`w-full aspect-[2/3] object-cover rounded-none sm:rounded-xl mb-3 border border-gray-200 dark:border-gray-700 group-hover:brightness-90 group-hover:scale-105 transition-all duration-200
       ${!details ? 'blur-md scale-105 grayscale' : ''}
     `}
     onError={(e) => {
