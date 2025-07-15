@@ -262,7 +262,7 @@ const [episode, setEpisode] = useState('');
 {isLoading && (
   <div className="text-center py-8">
     <img
-      src="/animated_icoc_camera.gif"
+      src="/animated_icon_camera.gif"
       alt="Loading..."
       className="w-16 h-16 mx-auto"
     />
