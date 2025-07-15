@@ -273,9 +273,11 @@ const [episode, setEpisode] = useState('');
 
             {searchResults.length > 0 && (
               <div className="mb-10">
+                <div className="px-2 sm:px-4">
                 <h2 className="text-2xl font-bold mb-8 text-gray-900 dark:text-white tracking-tight">
                   Search Results
                 </h2>
+                </div>
                 <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 justify-items-center">
                   {searchResults.map((item) => (
                     <MovieCard
@@ -295,15 +297,19 @@ const [episode, setEpisode] = useState('');
         {/* Tab: Bookmarks */}
         {activeTab === 'bookmarks' && (
           <div>
-            <h2 className="text-2xl font-bold mb-8 text-gray-900 dark:text-white tracking-tight px-2 sm:px-4">My Bookmarks</h2>
+            <div className="px-2 sm:px-4">
+            <h2 className="text-2xl font-bold mb-8 text-gray-900 dark:text-white tracking-tight">My Bookmarks</h2>
+            </div>
             
             {/* Movies Section */}
             {bookmarks.filter(item => item.Type === 'movie').length > 0 && (
               <div className="mb-8">
+                <div className="px-2 sm:px-4">
                 <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200 flex items-center gap-2">
                   <FaFilm className="text-primary-600" />
                   Movies
                 </h3>
+                </div>
                 <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 justify-items-center">
                   {bookmarks.filter(item => item.Type === 'movie').map((item) => (
                     <MovieCard
@@ -320,10 +326,12 @@ const [episode, setEpisode] = useState('');
             {/* Series Section */}
             {bookmarks.filter(item => item.Type === 'series').length > 0 && (
               <div className="mb-8">
+                <div className="px-2 sm:px-4">
                 <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200 flex items-center gap-2">
                   <FiBookmark className="text-primary-600" />
                   Series
                 </h3>
+                </div>
                 <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 justify-items-center">
                   {bookmarks.filter(item => item.Type === 'series').map((item) => (
                     <MovieCard
@@ -340,10 +348,12 @@ const [episode, setEpisode] = useState('');
             {/* Episodes Section */}
             {bookmarks.filter(item => item.Type === 'episode').length > 0 && (
               <div className="mb-8">
+                <div className="px-2 sm:px-4">
                 <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200 flex items-center gap-2">
                   <FiCalendar className="text-primary-600" />
                   Episodes
                 </h3>
+                </div>
                 <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 justify-items-center">
                   {bookmarks.filter(item => item.Type === 'episode').map((item) => (
                     <MovieCard
@@ -398,8 +408,8 @@ function MovieCard({ item, isBookmarked, onToggleBookmark, isWholeSeason }) {
   }, [item.imdbID]);
 
   return (
-    <div className="card group max-w-[240px] mx-auto bg-white/95 dark:bg-gray-800/95 rounded-xl border border-gray-100 dark:border-gray-700 hover:scale-105 transition-all duration-200 cursor-pointer p-3 sm:p-0">
-      <div className="relative overflow-hidden rounded-xl">
+<div className="card group w-full max-w-[240px] mx-auto bg-white/95 dark:bg-gray-800/95 rounded-xl border border-gray-100 dark:border-gray-700 hover:scale-105 transition-all duration-200 cursor-pointer p-0">
+<div className="relative overflow-hidden rounded-xl">
       <img
     src={
       (details?.Poster && details.Poster !== 'N/A')
