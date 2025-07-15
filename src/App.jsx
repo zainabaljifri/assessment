@@ -398,24 +398,21 @@ function MovieCard({ item, isBookmarked, onToggleBookmark, isWholeSeason }) {
   }, [item.imdbID]);
 
   return (
-    <div className="card group max-w-[240px] mx-auto bg-white/95 dark:bg-gray-800/95 rounded-xl border border-gray-100 dark:border-gray-700 hover:scale-105 transition-all duration-200 cursor-pointer p-3 sm:p-0">
+<div className="card group w-full max-w-[240px] mx-auto bg-white/95 dark:bg-gray-800/95 rounded-xl border border-gray-100 dark:border-gray-700 hover:scale-105 transition-all duration-200 cursor-pointer p-3 sm:p-0">
       <div className="relative overflow-hidden rounded-xl">
       <img
-    src={
-      (details?.Poster && details.Poster !== 'N/A')
-        ? details.Poster
-        : '/placeholder-poster.jpg'
-    }
-    alt={item.Title}
-    className={`w-full aspect-[2/3] object-cover rounded-xl mb-3 border border-gray-200 dark:border-gray-700 group-hover:brightness-90 group-hover:scale-105 transition-all duration-200
-      ${!details ? 'blur-md scale-105 grayscale' : ''}
-    `}
+  src={(details?.Poster && details.Poster !== 'N/A') ? details.Poster : '/placeholder-poster.jpg'}
+  alt={item.Title}
+  className={`w-full h-auto aspect-[2/3] object-cover rounded-xl mb-3 border border-gray-200 dark:border-gray-700 group-hover:brightness-90 group-hover:scale-105 transition-all duration-200
+    ${!details ? 'blur-md scale-105 grayscale' : ''}`}
+/>
+
     onError={(e) => {
       e.target.src =
         'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIFBvc3RlcjwvdGV4dD48L3N2Zz4=';
     }}
-  
-        />
+
+        
         {/* <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none rounded-xl" /> */}
         <button
           onClick={onToggleBookmark}
