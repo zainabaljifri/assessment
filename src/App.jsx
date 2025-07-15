@@ -295,7 +295,7 @@ const [episode, setEpisode] = useState('');
         {/* Tab: Bookmarks */}
         {activeTab === 'bookmarks' && (
           <div>
-            <h2 className="text-2xl font-bold mb-8 text-gray-900 dark:text-white tracking-tight">My Bookmarks</h2>
+            <h2 className="text-2xl font-bold mb-8 text-gray-900 dark:text-white tracking-tight px-2 sm:px-4">My Bookmarks</h2>
             
             {/* Movies Section */}
             {bookmarks.filter(item => item.Type === 'movie').length > 0 && (
