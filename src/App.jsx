@@ -264,7 +264,7 @@ const [episode, setEpisode] = useState('');
     <img
       src="/film-reel-icon.png"
       alt="Loading"
-      className="w-16 h-16 mx-auto animate-spin"
+      className="w-16 h-16 mx-auto  slow-spin"
     />
     <p className="mt-4 text-gray-600 dark:text-gray-400">Searching...</p>
   </div>
